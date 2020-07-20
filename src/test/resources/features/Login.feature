@@ -14,3 +14,4 @@ Feature: Calculator operation
     And user press number "3"
     Then user can see "12" in result
     And formula is being displayed as "4×3"
+    
