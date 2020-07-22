@@ -15,6 +15,7 @@ class MobileConfiguration {
     private static String mobilePlatform;
     private static String deviceName;
     private static AppiumDriver<MobileElement> appiumDriver;
+    private static DesiredCapabilities desiredCapabilities;
 
     private static void selectMobileToRunTest() {
         FileReader fileReader = null;
@@ -33,13 +34,13 @@ class MobileConfiguration {
         }
     }
 
-    static AppiumDriver<MobileElement> getAppiumDriver() {
+    private static void setCapabilities() {
         selectMobileToRunTest();
         Config config = ConfigFactory.load("mobile");
         String mobilePlatform = System.getProperty("mobilePlatform") == null ? MobileConfiguration.mobilePlatform : System.getProperty("mobilePlatform");
         String deviceName = System.getProperty("deviceName") == null ? MobileConfiguration.deviceName : System.getProperty("deviceName");
         if (config.hasPath(mobilePlatform)) {
-            DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+            desiredCapabilities = new DesiredCapabilities();
             desiredCapabilities.setCapability("platformName", mobilePlatform);
             desiredCapabilities.setCapability("deviceName", deviceName);
             desiredCapabilities.setCapability("udid", config.getConfig(mobilePlatform).withFallback(config).getConfig(mobilePlatform).getConfig(deviceName).getString("udid"));
@@ -48,13 +49,22 @@ class MobileConfiguration {
             desiredCapabilities.setCapability("appActivity", config.getConfig(mobilePlatform).withFallback(config).getConfig(mobilePlatform).getConfig(deviceName).getString("appActivity"));
             //desiredCapabilities.setCapability("automationName", config.getConfig(mobilePlatform).withFallback(config).getConfig(mobilePlatform).getConfig(deviceName).getString("automationName"));
             desiredCapabilities.setCapability("noSign", "true");
-            try {
-                URL url = new URL("http://0.0.0.0:4723/wd/hub");
-                appiumDriver = new AppiumDriver<>(url, desiredCapabilities);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
+    }
+
+    private static void lauchApp() {
+        try {
+            URL url = new URL("http://0.0.0.0:4723/wd/hub");
+            appiumDriver = new AppiumDriver<>(url, desiredCapabilities);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    static AppiumDriver<MobileElement> getAppiumDriver() {
+        selectMobileToRunTest();
+        setCapabilities();
+        lauchApp();
         return appiumDriver;
     }
 }
