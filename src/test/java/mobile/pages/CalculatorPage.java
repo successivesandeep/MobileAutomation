@@ -1,9 +1,10 @@
 package mobile.pages;
 
-import mobile.utilities.MobileDriver;
+import mobile.utilities.PageHandler;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 
-public class CalculatorPage extends MobileDriver {
+public class CalculatorPage extends PageHandler {
     private static String numberButton = "com.android.calculator2:id/digit_";
     private static String button = "com.android.calculator2:id/op_";
     private static String result = "com.android.calculator2:id/result";
@@ -11,26 +12,24 @@ public class CalculatorPage extends MobileDriver {
     private static String deleteButton = "com.android.calculator2:id/del";
 
     public static void selectNumber(String number) {
-        getDriver().findElementById(numberButton + number).click();
+        clickOnElement(By.id(numberButton + number));
     }
 
     public static void performOperation(String buttonName) {
-        getDriver().findElementById(button + buttonName).click();
+        clickOnElement(By.id(button + buttonName));
     }
 
     public static void seeResult(String expectedResult) {
-        String actualResult = getDriver().findElementById(result).getText();
-        Assert.assertEquals(expectedResult, actualResult);
+        Assert.assertEquals(expectedResult, getText(By.id(result)));
     }
 
     public static void seeFormulaInCalculator(String expectedFormula) {
-        String actaulFormula = getDriver().findElementById(formula).getText();
-        Assert.assertEquals(expectedFormula, actaulFormula);
+        Assert.assertEquals(expectedFormula, getText(By.id(formula)));
     }
 
     public static void clearResult() {
-        while (!getDriver().findElementById(formula).getText().equals("")) {
-            getDriver().findElementById(deleteButton).click();
+        while (!getText(By.id(formula)).equals("")) {
+            clickOnElement(By.id(deleteButton));
         }
     }
 }
