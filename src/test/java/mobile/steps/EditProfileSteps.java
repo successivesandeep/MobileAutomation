@@ -25,4 +25,9 @@ public class EditProfileSteps {
     public void userClicksOnBackButton() {
         EditProfilePage.clickOnBackButton();
     }
+
+    @And("^I click on change password button$")
+    public void iClickOnChangePasswordButton() {
+        EditProfilePage.changePasswordButton();
+    }
 }

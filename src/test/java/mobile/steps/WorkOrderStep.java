@@ -1,6 +1,5 @@
 package mobile.steps;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import mobile.pages.WorkOrderPage;

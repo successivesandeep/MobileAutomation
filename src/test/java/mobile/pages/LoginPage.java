@@ -31,9 +31,8 @@ public class LoginPage extends I {
         I.launchApp();
     }
 
-    public static void veryMessageForInvalidCredential(String expectedMessage) throws InterruptedException {
+    public static void veryMessageForInvalidCredential(String expectedMessage) {
         I.waitTillTextIsInvisible(By.id(invalidCredentialMessage), "Loading...");
-        Thread.sleep(2000);
         String actualMessage = I.getText(By.id(invalidCredentialMessage));
         Assert.assertEquals(expectedMessage, actualMessage);
     }
