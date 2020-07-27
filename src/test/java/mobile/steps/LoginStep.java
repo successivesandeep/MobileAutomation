@@ -33,7 +33,7 @@ public class LoginStep {
         LoginPage.launchApp();
     }
 
-    @Then("^error message is displaying as \"([^\"]*)\"$")
+    @Then("^I can see message as \"([^\"]*)\"$")
     public void errorMessageIsDisplayingAs(String errorMessage) throws InterruptedException {
         LoginPage.veryMessageForInvalidCredential(errorMessage);
     }

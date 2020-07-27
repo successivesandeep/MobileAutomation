@@ -12,7 +12,7 @@ Feature: Login
     And I enter emailId as "payalgaur151@mailinator.com"
     And I enter password as "0987654321"
     And I click on SignIn Button
-    Then error message is displaying as "Invalid email address or password."
+    Then I can see message as "Invalid email address or password."
     And I press "Ok" button
     And I close app
 
@@ -21,13 +21,13 @@ Feature: Login
     And I enter emailId as "xyz@gmail.com"
     And I enter password as "12345678"
     And I click on SignIn Button
-    Then error message is displaying as "Invalid email address or password."
+    Then I can see message as "Invalid email address or password."
     And I press "Ok" button
     And I close app
 
   Scenario: Login without user credential
     Given I launch app
     And I click on SignIn Button
-    Then error message is displaying as "Email address cannot be empty."
+    Then I can see message as "Email address cannot be empty."
     And I press "Ok" button
     And I close app
