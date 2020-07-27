@@ -76,7 +76,9 @@ public class I extends MobileConfiguration {
 
     protected static void fillField(WebElement webElement, String data) {
         waitForVisible(webElement);
-        webElement.clear();
+        webElement.sendKeys(Keys.CONTROL + "a");
+        webElement.sendKeys(Keys.ENTER);
+        //webElement.clear();
         webElement.sendKeys(data);
         getDriver().hideKeyboard();
     }
