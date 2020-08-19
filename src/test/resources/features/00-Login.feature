@@ -1,6 +1,7 @@
 Feature: Login
 
   Scenario: Login with valid user credential
+    Given I launch app
     When I enter emailId as "payalgaur151@mailinator.com"
     And I enter password as "1234567890"
     And I click on SignIn Button

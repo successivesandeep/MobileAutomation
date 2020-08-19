@@ -50,7 +50,7 @@ Feature: Edit Profile
       | payalgaur151@mailinator.com | 1234567890 |
     When I click on Menu button
     And I click on Edit Profile button
-    And user clicks on back button
+    And I click on back button
     Then I am able to see profile detail
       | name       | email                       | contactNumber |
       | Payal Gaur | payalgaur151@mailinator.com | 987654323456  |
