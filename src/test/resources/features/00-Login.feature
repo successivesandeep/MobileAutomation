@@ -14,7 +14,7 @@ Feature: Login
     And I enter password as "0987654321"
     And I click on SignIn Button
     Then I can see message as "Invalid email address or password."
-    And I press "Ok" button
+    And I press "OK" button
     And I close app
 
   Scenario: Login with invalid user credential
@@ -23,12 +23,12 @@ Feature: Login
     And I enter password as "12345678"
     And I click on SignIn Button
     Then I can see message as "Invalid email address or password."
-    And I press "Ok" button
+    And I press "OK" button
     And I close app
 
   Scenario: Login without user credential
     Given I launch app
     And I click on SignIn Button
     Then I can see message as "Email address cannot be empty."
-    And I press "Ok" button
+    And I press "OK" button
     And I close app

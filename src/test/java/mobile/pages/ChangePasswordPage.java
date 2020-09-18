@@ -35,6 +35,9 @@ public class ChangePasswordPage extends I {
 
     public static void seeMessage(String message) {
         I.waitTillTextIsInvisible(By.id(invalidCredentialMessage), "Loading...");
+        while (I.getText(By.id(invalidCredentialMessage)).equals("Loading...")) {
+            I.waitFor(2);
+        }
         String hint = I.getText(By.id(hintMessage));
         Assert.assertEquals(hint.trim(), message.trim());
     }

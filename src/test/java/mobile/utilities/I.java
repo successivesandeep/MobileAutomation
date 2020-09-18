@@ -2,23 +2,17 @@ package mobile.utilities;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.PerformsTouchActions;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.WaitOptions;
-import io.appium.java_client.touch.offset.PointOption;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 
 public class I extends MobileConfiguration {
+
     private static final AppiumDriver<MobileElement> driver = getAppiumDriver();
     private static final int DEFAULT_TIME_OUT = 60;
     private static final WebDriverWait wait = new WebDriverWait(driver, DEFAULT_TIME_OUT);
@@ -43,23 +37,34 @@ public class I extends MobileConfiguration {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
-    protected static void textIsPresent(MobileElement mobileElement, String expectedText) {
+    protected static void canSeeText(MobileElement mobileElement, String expectedText) {
         wait.until(ExpectedConditions.textToBePresentInElement(mobileElement, expectedText));
         Assert.assertEquals(expectedText, mobileElement.getText());
     }
 
-    protected static void textIsPresent(By locator, String expectedText) {
+    protected static void canSeeText(By locator, String expectedText) {
         wait.until(ExpectedConditions.textToBe(locator, expectedText));
         Assert.assertEquals(expectedText, getDriver().findElement(locator).getText());
     }
+
+    protected static void canSeeSubText(MobileElement mobileElement, String expectedText) {
+        waitForVisible(mobileElement);
+        Assert.assertTrue(mobileElement.getText().toLowerCase().contains(expectedText.toLowerCase()));
+    }
+
+    protected static void canSeeSubText(By locator, String expectedText) {
+        waitForVisible(locator);
+        Assert.assertTrue(getDriver().findElement(locator).getText().toLowerCase().contains(expectedText.toLowerCase()));
+    }
+
 
     protected static void waitTillTextIsInvisible(By locator, String text) {
         wait.until(ExpectedConditions.invisibilityOfElementWithText(locator, text));
     }
 
-    public static void waitFor(int minute) {
+    public static void waitFor(int seconds) {
         try {
-            Thread.sleep(minute * 1000);
+            Thread.sleep(seconds * 1000);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -83,8 +88,6 @@ public class I extends MobileConfiguration {
 
     protected static void fillField(By locator, String data) {
         waitForVisible(locator);
-        getDriver().findElement(locator).sendKeys(Keys.CONTROL + "a");
-        getDriver().findElement(locator).sendKeys(Keys.ENTER);
         getDriver().findElement(locator).clear();
         getDriver().findElement(locator).sendKeys(data);
         getDriver().hideKeyboard();
@@ -92,8 +95,6 @@ public class I extends MobileConfiguration {
 
     protected static void fillField(MobileElement mobileElement, String data) {
         waitForVisible(mobileElement);
-        mobileElement.sendKeys(Keys.CONTROL + "a");
-        mobileElement.sendKeys(Keys.ENTER);
         mobileElement.clear();
         mobileElement.sendKeys(data);
         getDriver().hideKeyboard();
@@ -138,16 +139,18 @@ public class I extends MobileConfiguration {
         Assert.assertTrue(mobileElement.isSelected());
     }
 
-
-    public static void scrollDown() {
-        Dimension dimension = getDriver().manage().window().getSize();
-        int scrollStart = (int) (dimension.getHeight() * 0.8);
-        int scrollEnd = (int) (dimension.getHeight() * 0.2);
-
-        new TouchAction((PerformsTouchActions) getDriver())
-                .press(PointOption.point(0, scrollStart))
-                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
-                .moveTo(PointOption.point(0, scrollEnd))
-                .release().perform();
+    protected static void searchValue(By locator, String data) {
+        waitForVisible(locator);
+        getDriver().findElement(locator).clear();
+        Actions actions = new Actions(getDriver());
+        actions.sendKeys(getDriver().findElement(locator), data).sendKeys(Keys.ENTER).build().perform();
     }
+
+    protected static void searchValue(MobileElement mobileElement, String data) {
+        waitForVisible(mobileElement);
+        mobileElement.clear();
+        Actions actions = new Actions(getDriver());
+        actions.sendKeys(mobileElement, data).sendKeys(Keys.ENTER).build().perform();
+    }
+
 }

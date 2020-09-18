@@ -11,6 +11,11 @@ public class MyProfileSteps {
         MyProfilePage.verifyMyProfile(dataTable);
     }
 
+    @Then("^I am able to see profile detail is not updated$")
+    public void iAmAbleToSeeProfileDetailIsNotUpdated(DataTable dataTable) {
+        MyProfilePage.profileIsNotUpdated(dataTable);
+    }
+
     @And("^I click on Edit Profile button$")
     public void iClickOnEditProfileButton() {
         MyProfilePage.clickOnEditProfileButton();

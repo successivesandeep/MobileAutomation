@@ -32,7 +32,10 @@ public class LoginPage extends I {
     }
 
     public static void veryMessageForInvalidCredential(String expectedMessage) {
-        I.waitTillTextIsInvisible(By.id(invalidCredentialMessage), "Loading...");
+        //I.waitTillTextIsInvisible(By.id(invalidCredentialMessage), "Loading...");
+        while (I.getText(By.id(invalidCredentialMessage)).equals("Loading...")) {
+            I.waitFor(2);
+        }
         String actualMessage = I.getText(By.id(invalidCredentialMessage));
         Assert.assertEquals(expectedMessage, actualMessage);
     }

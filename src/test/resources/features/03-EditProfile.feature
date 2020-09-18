@@ -51,7 +51,7 @@ Feature: Edit Profile
     When I click on Menu button
     And I click on Edit Profile button
     And I click on back button
-    Then I am able to see profile detail
-      | name       | email                       | contactNumber |
-      | Payal Gaur | payalgaur151@mailinator.com | 987654323456  |
+    Then I am able to see profile detail is not updated
+      | name       | contactNumber |
+      | Payal Gaur | 987654323456  |
     And I close app
