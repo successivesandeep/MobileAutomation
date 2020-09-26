@@ -71,6 +71,12 @@
             <artifactId>config</artifactId>
             <version>1.4.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.jayway.android.robotium/robotium-solo -->
+        <dependency>
+            <groupId>com.jayway.android.robotium</groupId>
+            <artifactId>robotium-solo</artifactId>
+            <version>5.6.3</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -105,7 +111,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.21.0</version>
+                <version>2.22.2</version>
                 <configuration>
                     <includes>
                         <include>Run*Test.java</include>

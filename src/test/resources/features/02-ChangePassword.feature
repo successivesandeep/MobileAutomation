@@ -12,25 +12,28 @@ Feature: Change password functionality
     When I enters current password, new password and confirm password are
       | currentPassword | newPassword | confirmPassword |
       | 1234567890      | @#$%^       | @#$%^           |
-    And   I Click on submit button
-    Then  I see the error message saying "Password length should be between 8 to 20 characters."
-    And   I Accept the dialog box
+    And I Click on submit button
+    Then I see the error message saying "Password length should be between 8 to 20 characters."
+    And I Accept the dialog box
+    And I close app
 
   Scenario: See message if current password is incorrect
     When I enters current password, new password and confirm password are
       | currentPassword | newPassword | confirmPassword |
       | @#$ffjs2345     | 1234567890  | 1234567890      |
-    And   I Click on submit button
-    Then  I see the error message saying "Entered current password is wrong. Please enter correct current password."
-    And   I Accept the dialog box
+    And I Click on submit button
+    Then I see the error message saying "Entered current password is wrong. Please enter correct current password."
+    And I Accept the dialog box
+    And I close app
 
   Scenario: See message if new password and confirm password are not same
     When I enters current password, new password and confirm password are
       | currentPassword | newPassword | confirmPassword |
       | 1234567890      | Shiwani@123 | Sharma@123      |
-    And   I Click on submit button
-    Then  I see the error message saying "New Password and Confirm Password doesn't match..!"
-    And   I Accept the dialog box
+    And I Click on submit button
+    Then I see the error message saying "New Password and Confirm Password doesn't match..!"
+    And I Accept the dialog box
+    And I close app
 
   Scenario: See message if required fields are blank
     Then I can see message when required field is missing
@@ -42,8 +45,8 @@ Feature: Change password functionality
       |                 | Shiwani@123 | Shiwani@123     | Password field can't be empty.                     |
       | 1234567890      | Shiwani@123 |                 | New Password and Confirm Password doesn't match..! |
       | 1234567890      |             | Shiwani@123     | Password field can't be empty.                     |
-
-    And   I Accept the dialog box
+    And I Accept the dialog box
+    And I close app
 
   Scenario: See message if current password, new password and confirm password are same
     When I enters current password, new password and confirm password are
@@ -53,6 +56,7 @@ Feature: Change password functionality
     Then  I am able to see profile detail
       | name       | email                       | contactNumber |
       | Payal Gaur | payalgaur151@mailinator.com | 987654323456  |
+    And I close app
 
 
 

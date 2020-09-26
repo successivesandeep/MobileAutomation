@@ -52,7 +52,7 @@ class MobileConfiguration {
         }
     }
 
-    private static void lauchApp() {
+    private static void launchApp() {
         try {
             URL url = new URL("http://0.0.0.0:4723/wd/hub");
             appiumDriver = new AppiumDriver<>(url, desiredCapabilities);
@@ -64,7 +64,7 @@ class MobileConfiguration {
     static AppiumDriver<MobileElement> getAppiumDriver() {
         selectMobileToRunTest();
         setCapabilities();
-        lauchApp();
+        launchApp();
         return appiumDriver;
     }
 }

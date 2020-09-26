@@ -21,7 +21,7 @@ public class EditProfileSteps {
         EditProfilePage.changeMobileNumber(contactNumber);
     }
 
-    @And("^user clicks on back button$")
+    @And("^I click on back button$")
     public void userClicksOnBackButton() {
         EditProfilePage.clickOnBackButton();
     }
