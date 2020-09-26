@@ -47,6 +47,16 @@ public class I extends MobileConfiguration {
         Assert.assertEquals(expectedText, getDriver().findElement(locator).getText());
     }
 
+    protected static void canNotSeeText(MobileElement mobileElement, String expectedText) {
+        waitForVisible(mobileElement);
+        Assert.assertNotEquals(expectedText, mobileElement.getText());
+    }
+
+    protected static void canNotSeeText(By locator, String expectedText) {
+        waitForVisible(locator);
+        Assert.assertNotEquals(expectedText, getDriver().findElement(locator).getText());
+    }
+
     protected static void canSeeSubText(MobileElement mobileElement, String expectedText) {
         waitForVisible(mobileElement);
         Assert.assertTrue(mobileElement.getText().toLowerCase().contains(expectedText.toLowerCase()));
